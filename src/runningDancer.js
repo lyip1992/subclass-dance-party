@@ -1,6 +1,6 @@
 var RunningDancer = function(top, left, timeBetweenSteps){
 
-  this.$node = $('<span class="runningHomer"></span>');
+  this.$node = $('<span class="runningHomer simpsons"></span>');
 
   this.timeBetweenSteps = timeBetweenSteps;
 
@@ -26,5 +26,12 @@ RunningDancer.prototype.step = function(){
   // other effects you can use on a jQuery-wrapped html tag.
   //this.$node.animate();
 
-  $('.runningHomer').animate({left: '3000px'}, "slow");
+  var size = Math.random() * 3;
+
+  $('.runningHomer').css({transform: 'scaleX(' + size + ')', });
+
+};
+
+RunningDancer.prototype.move = function(){
+  this.$node.css({transform: 'rotateY(180deg)'});
 };
