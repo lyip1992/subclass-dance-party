@@ -1,14 +1,11 @@
 var CrawlingDancer = function(top, left, timeBetweenSteps){
+    Dancer.apply(this, arguments);
 
-  this.$node = $('<span class="crawlingHomer simpsons"></span>');
+  this.$node.addClass('crawlingHomer').removeClass('dancer');
 
   this.timeBetweenSteps = timeBetweenSteps;
 
   this.step();
-
-  this.top = top;
-
-  this.left = left;
 
   this.setPosition(top, left);
 

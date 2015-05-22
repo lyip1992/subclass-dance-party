@@ -2,11 +2,38 @@
 var Dancer = function(top, left, timeBetweenSteps){
 
   // use jQuery to create an HTML <span> tag
-  this.$node = $('<span class="dancer simpsons"></span>');
+  this.$node = $('<span class="dancer node"></span>');
 
-  this.top = top;
+  $('.line').on('click', function() {
+    var position = $("body").height() / 2;
+    this.$node.animate({top:position});
+  }.bind(this));
 
-  this.left = left;
+  this.$node.on('mouseover', function() {
+    $(this).css({transform: 'rotateY(180deg)'});
+  });
+
+  $('.interact').on('click', function(){
+
+    var pixelsToNumber = function(string) {
+      var newString = Array.prototype.slice.call(string);
+      newString.pop().pop();
+      return eval(newString.join());
+    }
+
+    for(var i = 0; i<window.dancers.length; i++){
+      var length = this.$node.css('left') - window.dancers[i].$node.css('left');
+      var height = (this.$node.css('top') - window.dancers[i].$node.css('top'));
+
+      var squared = Math.pow(length, 2) + Math.pow(height, 2);
+      var distance = Math.pow(squared, 0.5);
+
+      if( distance < 150) {
+        this.$node.css({top: '+=150px', left: '+=150px'});
+        window.dancers[i].$node.css({top: '-=150px', left: '-=150px'});
+      }
+    }
+  }.bind(this));
 
   this.timeBetweenSteps = timeBetweenSteps;
 
@@ -15,8 +42,6 @@ var Dancer = function(top, left, timeBetweenSteps){
   this.setPosition(top, left);
   // now that we have defined the dancer object, we can start setting up important parts of it by calling the methods we wrote
   // this one sets the position to some random default point within the body
-
-
 
 };
 
@@ -37,6 +62,3 @@ Dancer.prototype.setPosition = function(top, left){
   this.$node.css(styleSettings);
 };
 
-Dancer.prototype.lineUp = function() {
-  this.$node.animate({top:'500px'});
-};

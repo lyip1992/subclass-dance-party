@@ -31,47 +31,5 @@ $(document).ready(function(){
     $('body').append(dancer.$node);
   });
 
-  $('.line').on('click', function() {
-    for( var i = 0; i < window.dancers.length; i++ ) {
-      window.dancers[i].lineUp();
-    }
-  });
-
-  $('body').on('mouseover', '.simpsons', function() {
-    for( var i = 0; i < window.dancers.length; i++ ) {
-      if ( window.dancers[i].move ) window.dancers[i].move();
-    }
-  });
-
-  // click handler to do something based on their positions
-  $('body').on('click', '.simpsons', function(){
-    // iterate through app of the dancers
-    for( var i = 0; i < window.dancers.length - 1; i++ ) {
-
-      var distance = Math.pow(
-
-          (
-            Math.pow(
-              (window.dancers[i].left - window.dancers[i + 1].left), 2
-            )
-          + Math.pow(
-              (window.dancers[i].top - window.dancers[i + 1].top), 2
-            )
-          ), 0.5
-        );
-      if (
-        distance < 150
-
-      ) {
-
-        window.dancer[i].css({top: '+=150px', left: '+=150px'});
-        window.dancer[i+1].css({top: '-=150px', left: '-=150px'});
-
-      }
-    }
-
-  });
-      // calculate the distance between each dancer
-        // if they're farther than 20px away, pair them up
 });
 
